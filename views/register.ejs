@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head") %>
+<body>
+    <div class="container-md">
+        <h1>Sing UP</h1>
+        <form action="/user/register" method="POST" style="margin-bottom: 35px;">
+            <!-- <div class="row">
+                <div class="col-4">
+                    <img id="profilIcon" src="/profil_icon.jpg" alt="Avatar" style="width:150px; border-radius: 50%;">
+                </div>
+                <div class="col-4 mb-5">
+                    <input type="file" name="inputImage" id="inputImage" accept="image/*" >
+                </div>
+                <div class="col-3 mb-5" id="imagePreview" style="width: 150px;  border: 2px solid;">
+                    <img src="" alt="Image Preview" class="imagePreview_image" style="display: none; width: 100%;">
+                    <span class="imagePreview_text">Image Preview</span>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-4">
+                    <label >Name:</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="name" name="name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label >Surname:</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="surname" name="surname">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label >Username:</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="username" name="username">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label >Email:</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="email" name="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label >Password:</label>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="password" name="password">
+                </div>
+            </div>
+
+            <div class="row editButons">
+                <button id="submit" type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    <%- include("./partials/footer") %>
+
+    <script>
+        const submit = document.getElementById("submit");
+
+        submit.addEventListener("click", function(){
+            var imageDiv = document.createElement("DIV");
+            var username = document.getElementById("username").value;
+            console.log(username);
+            imageDiv.innerHTML += `
+            <form action="/user/register2/${username}" method="POST" style="margin-bottom: 35px;">
+            <div class="row">
+                <div class="col-4">
+                    <img id="profilIcon" src="/profil_icon.jpg" alt="Avatar" style="width:150px; border-radius: 50%;">
+                </div>
+                <div class="col-4 mb-5">
+                    <input type="file" name="input Image" id="inputImage" accept="image/*" >
+                </div>
+                <div class="col-3 mb-5" id="imagePreview" style="width: 150px;  border: 2px solid;">
+                    <img src="" alt="Image Preview" class="imagePreview_image" style="display: none; width: 100%;">
+                    <span class="imagePreview_text">Image Preview</span>
+                </div>
+            </div>
+            <div class="row editButons">
+                <a href="/" class="btn btn-secondary">CANCEL</a>
+                <button id="submit" type="submit" class="btn btn-success">Add İmage</button>
+            </div>
+            </form>
+            `;
+            var mainDiv = document.getElementsByClassName("container-md")[0];
+            mainDiv.appendChild(imageDiv);
+
+            const inputImage = document.getElementById("inputImage");
+            const previewContainer = document.getElementById("imagePreview");
+            const previewImage = previewContainer.querySelector(".imagePreview_image");
+            const previewDefaultText = previewContainer.querySelector(".imagePreview_text");
+            const profilIcon = document.getElementById("profilIcon");
+
+            inputImage.addEventListener("change", function() {
+            const file = this.files[0];
+
+            if(file) {
+                const reader = new FileReader();
+                previewDefaultText.style.display = "none";
+                previewImage.style.display = "block";
+
+                reader.addEventListener("load",function() {
+                    console.log(this);
+                    previewImage.setAttribute("src", this.result);
+                    profilIcon.setAttribute("src",this.result);
+                });
+                reader.readAsDataURL(file);
+            }else {
+                previewDefaultText.style.display = null;
+                previewImage.style.display = null;
+                previewImage.setAttribute("src","");
+                profilIcon.setAttribute("src","");
+            }
+        });
+        });
+
+    </script>
+</body>
+</html>    

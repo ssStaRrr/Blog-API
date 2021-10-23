@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head") %>
+<body>
+
+    <div class="container-lg">
+      <h1 class="mb-4">EDİT ARTICLE</h1>
+        <form action="/articles/edit/<%= article.id %>?_method=PUT" method="POST">
+            <div class="row">
+              <div class="col-25">
+                <label for="title">Title</label>
+              </div>
+              <div class="col-75">
+                <input required type="text" id="title" name="title" placeholder="Article Title" value="<%= article.title %>">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="description">Description</label>
+              </div>
+              <div class="col-75">
+                <textarea required id="description" name="description" placeholder="Write description.." style="height:200px"><%= article.description %></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-25">
+                <label for="markdown">Markdown</label>
+              </div>
+              <div class="col-75">
+                <textarea required id="markdown" name="markdown" placeholder="Write markdown.." style="height:200px"><%= article.description %></textarea>
+              </div>
+            </div>
+
+            <div class="row editButons">
+              <a href="/" class="btn btn-secondary" style="margin-right: 5px; text-transform: uppercase;"> Cancel </a>
+              <input type="submit" value="Submit" style="text-transform: uppercase;">
+              <% if(article.isCreated == false) { %>
+                <div>
+                  <p style="color:red"> Makale yazabilmek en az 3 karakterli başlık ve en az 10 karakterli açıklama giriniz </p>
+                </div>
+              <% } %>
+            </div>
+          </form>
+    </div>
+
+    <%- include("./partials/footer") %>
+</body>
+</html>

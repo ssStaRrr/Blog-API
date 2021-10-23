@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head') %>
+<body>
+    <%- include('partials/nav') %>    
+    <div class="container-lg">
+    <div class="container">
+        <h1 class="mb-4"> Blog Articles </h1>
+        <a href="/articles/new" class="btn btn-success"> New Article </a>
+    </div>
+
+    <% articles.forEach( (article) => { %>
+        <div class="card mt-4">
+            <% if(article.articleImage==undefined) { %>
+                <div class="imageDiv">
+                    <img src="../emptyArticleImage.jpg" class="card-img-top" alt="image">
+                </div>
+                <% } else { %>
+            <div class="imageDiv">
+                <!-- <%  let extension = article.articleImage.split(".")[1]; %> -->
+                <img src="../uploads/image_<%=article.id %>.<%=article.articleImage.split(".")[1]%>" class="card-img-top" alt="image">
+            </div>
+            <% }%>
+
+            <div class="card-body" >
+                <h5 class="card-title" style="color:red;" > <%= article.title %> </h5>
+                <div class="card-subtitle text-muted mb-2">
+                    <%= article.createdAt.toLocaleDateString() %>
+                </div>
+                <div class="card-text mb-2" id="descriptionHomePage">
+                    <p class="card-text"> <%= article.description %> </p>
+                </div>
+                <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+                <a href="/articles/addArticleImagePage/<%= article.id %>" class="btn btn-secondary">Add/Edit Article Image</a>
+                <form action="/articles/delete/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form>
+              </div> 
+        </div>
+    <% }) %>
+    </div>    
+    <%- include('partials/footer') %>
+</body>
+</html>

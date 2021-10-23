@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head') %>
+<body>
+
+    <div class="container-lg">
+        <div class="card mt-4">
+            <% if(article.articleImage==undefined) { %>
+                <div class="imageDiv">
+                    <img src="../emptyArticleImage.jpg" class="card-img-top" alt="image">
+                </div>
+                <% } else { %>
+            <div class="imageDiv">
+                <img src="../uploads/image_<%=article.id %>.png" class="card-img-top" alt="image">
+            </div>
+            <% }%>
+
+            <div class="card-body">
+                <h5 class="card-title"> <%= article.title %> </h5>
+                <div class="card-subtitle text-muted mb-3">
+                    <%= article.createdAt.toLocaleDateString() %>
+                </div>
+                <div class="card-text mb-5">
+                    <p class="card-text"> <%= article.description %> </p>
+                </div>
+                <div>
+                    <a href="/" class="btn btn-primary">All Articles</a>
+                    <form action="/articles/<%= article.id %>/editBlogPage" method="GET" class="d-inline">
+                        <button type="submit" class="btn btn-info">EDİT</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

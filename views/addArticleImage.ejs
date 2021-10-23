@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head") %>
+<body>
+    <div class="container-lg">
+        <form action="/articles/addArticleImage/<%= article.id %>" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-2">
+                    <label for="image">İMAGE</label>
+                </div>
+                <div class="col-10 mb-5">
+                    <input type="file" name="image" id="image" accept="image/*" onchange="showPreview(event);">
+                </div>
+            </div>
+
+            <div class="row">
+                <a href="/" class="btn btn-secondary"> CANCEL </a>
+                <input type="submit" value="EDİT" >
+            </div>
+        </form>
+
+    </div>
+
+    <%- include("./partials/footer") %>
+</body>
+</html>
